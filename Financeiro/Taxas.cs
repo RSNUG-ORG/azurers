@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Financeiro
 {
@@ -22,8 +20,8 @@ namespace Financeiro
 
                 double taxaCorrecao = Math.Pow(1.0 + taxaJurosSimulada, -prazoEmMeses);
 
-                double funcaoTaxaJuros = (1 - Math.Pow(1.0 + taxaJurosSimulada, -prazoEmMeses)) * ((double)parcelaDesejada / taxaJurosSimulada) - (double)valorFinanciamento;
-                double derivadaFuncaoTaxaJuros = (double)parcelaDesejada * ((prazoEmMeses * (Math.Pow(1 + taxaJurosSimulada, -prazoEmMeses - 1))) / taxaJurosSimulada - (1 - Math.Pow(1 + taxaJurosSimulada, -prazoEmMeses)) / Math.Pow(taxaJurosSimulada, 2));
+                double funcaoTaxaJuros = (1 - taxaCorrecao) * ((double)parcelaDesejada / taxaJurosSimulada) - (double)valorFinanciamento;
+                double derivadaFuncaoTaxaJuros = (double)parcelaDesejada * ((prazoEmMeses * (Math.Pow(1 + taxaJurosSimulada, -prazoEmMeses - 1))) / taxaJurosSimulada - (1 - taxaCorrecao) / Math.Pow(taxaJurosSimulada, 2));
                 taxaJuros = taxaJurosSimulada - (funcaoTaxaJuros / derivadaFuncaoTaxaJuros);
             }
 
